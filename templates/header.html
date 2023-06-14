@@ -1,0 +1,76 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-xl navbar-default">
+  <div class="container">
+    <a class="" href="{% url 'home' %}">
+      <h1>ET-SHOP STORE</h1>
+      <!-- <img src="{% static 'images/png/logo.png' %}" height="50" /> -->
+    </a>
+
+    <span class="d-inline-block text-truncate" style="max-width: 150px;">
+      <a class="btn btn-sm my-0 float-left order-1" href="{% url 'category' %}">
+        <i class="fe fe-menu font-size-sm"></i>
+        Category
+      </a>
+    </span>
+
+    {% if request.user.is_authenticated %}
+    <li class="nav-item dropdown order-3 list-unstyled">
+      <a class="nav-link dropdown-toggle f-16 text-inherit font-weight-medium " id="navbarLanding"
+        data-toggle="dropdown" href="{% url 'customerinfo' %}">
+        <i class="fe fe-user mr-1"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <a href="" class="dropdown-item"> <i class="fe fe-user mr-1"></i> <b> Hi, {{user.first_name}} !</b>  </a>
+
+        <a href="{% url 'customer_orders' %}" class="dropdown-item"><i class="fe fe-shopping-bag mr-1"></i> My
+          Orders</a>
+
+        <a href="{% url 'review' %}" class="dropdown-item"> <i class="fe fe-star mr-1"></i> Review My Order</a>
+
+        <a href="{% url 'saved_products' %}" class="dropdown-item"><i class="fe fe-heart mr-1"></i> Saved Products</a>
+
+
+        <hr class="mx-3">
+
+        <a href="{% url 'customerinfo' %}" class="dropdown-item">
+          <i class="fe fe-settings mr-1"></i>
+           My Account
+        </a>
+
+        <a href="{% url 'address' %}" class="dropdown-item">
+          <i class="fe fe-map-pin mr-1"></i>
+           My Address
+        </a>
+        <a href="{% url 'user_logout' %}" class="dropdown-item text-danger">
+          <i class="fe fe-power mr-1"></i>
+           Log out
+        </a>
+      </ul>
+    </li>
+    {% else %}
+    <span class="order-3">
+      <small class="float-left">Welcome,</small> <br>
+      <a class="text-hover-primary font-weight-semi-bold text-inherit" href="{% url 'user_login' %}">Login</a> |
+      <a class="text-hover-primary font-weight-semi-bold text-inherit" href="{% url 'signup' %}">Signup</a>
+    </span>
+    {% endif %}
+
+
+    <a href="{% url 'cart' %}"
+      class="order-lg-4 order-4 btn btn-sm rounded-pill {% if cart_count > 0 %} btn-light-warning {% else %} btn-light {% endif %} f-17"><i
+        class="fe fe-shopping-bag f-17"></i> {{cart_count}}</a>
+
+    <div class="col-12 col-md-7 order-lg-2 order-3">
+      <form method='get' action= "{% url 'search-product' %}" class="d-flex align-items-center mx-auto mt-3 mt-lg-0">
+        <span class="position-absolute pl-3 search-icon">
+          <i class="fe fe-search"></i>
+        </span>
+        <input name="q" value="{{ query }}" class="form-control py-2 pl-6 bg-light" style="border: none;"
+          placeholder="What are you looking for ?">
+      </form>
+    </div>
+
+  
+  </div>
+</nav>

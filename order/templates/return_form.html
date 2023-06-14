@@ -1,0 +1,20 @@
+<div class="card p-3 mb-3">
+    <div class="media">
+        <img src="{{item.product.imsge.url}}" class="mr-3 p-2 border rounded" width="60">
+        <div class="media-body">
+            <div class="d-flex justify-content-between">
+                <p class="my-0 f-16">{{item.product.title}}</p>
+                <span>{{item.get_type}}</span>
+            </div>
+
+            <h4 class="mt-1 font-weight-semi-bold mb-0 f-18">Rs. {{item.product.selling_price}}</h4>
+        </div>
+    </div>
+</div>
+
+<form method="POST" enctype="multipart/form-data" action="{% url 'product_return' id=item.id %}">
+    {% csrf_token %}
+    <label class="f-16 text-dark mt-2">Describe reason for product return:</label>
+    <textarea required name="reason" rows="5" class="form-control"></textarea>
+    <button class="btn btn-sm btn-light-primary text-dark-primary mt-1">Submit return form</button>
+</from> 

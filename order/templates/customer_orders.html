@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<title> {% block title %} | Orders {% endblock %} </title>
+
+{% block content %}
+
+
+<div class="pt-2 pb-5">
+    <div class="container">
+
+        <div class="row mt-0 mt-md-4 f-16">
+
+            <div class="col-lg-3 col-md-4 col-12">
+                {% include 'customer_sidebar.html' %}
+            </div>
+
+            <div class="col-lg-9 col-md-8 col-12">
+                <h1 class="mb-1 h2 font-weight-bold">Recent orders</h1>
+                <hr>
+
+                {% include 'message.html' %}
+
+                {% for order in object_list %}
+                <div class="card card-body bg-light mb-5">
+                    <div class="row">
+
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-12 px-5">
+                            <div class="text-center">
+                                <h4 class="mb-1">Your order total amount</h4>
+                                <h1 class="mb-0 font-weight-bold">{{order.total}} Birr</h1>
+                                <table class="mx-auto my-3 w-100">
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-weight-medium pb-2 text-left">Subtotal :</td>
+                                            <td class="text-right pb-2 font-weight-medium">
+                                                {{order.sub_total}} Birr</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="font-weight-medium pb-2 text-left">Delivery charge:</td>
+                                            <td class="text-right text-info pb-2 font-weight-medium">
+                                                {{order.delivery_charge}} Birr</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="font-weight-medium pb-2 text-left">Discount:</td>
+                                            <td class="text-right text-danger pb-2 font-weight-medium">
+                                                {% if order.coupon %}
+                                                 - {{order.coupon.value}} Birr
+                                                {% else %}
+                                                  0.0 Birr
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <dl class="row">
+                                    <dt class="col-8 font-weight-medium text-left">Order ID:</dt>
+                                    <dd class="col-4 text-right pt-1 h4 font-weight-semi-bold">#{{order.id}}</dd>
+
+                                    <dt class="col-8 font-weight-medium text-left">Payment Method:</dt>
+                                    <dd class="col-4 text-right pt-1 h4 font-weight-semi-bold">{{order.payment_method}}</dd>
+
+                                    <dt class="col-6 font-weight-medium text-left">Ordered Date:</dt>
+                                    <dd class="col-6 text-right pt-1"> {{order.created|date:"F j, Y"}}</dd>
+
+                                    <dt class="col-12 font-weight-medium text-left">Delivery Address:</dt>
+                                    <dd class="col-12 text-left pt-1">{{order.address.area}}, {{order.address.city}},
+                                        {{order.address.district}}</dd>
+                                </dl>
+
+                            </div>
+                        </div>
+
+                        <div class="col-xl-8 col-lg-8 col-md-12 col-12 px-5">
+                            <h3 class="mb-3 font-weight-semi-bold">Ordered Items</h3>
+
+                            {% for i in order.order_items.all %}
+                            <div class="card p-3 mb-3">
+                                <div class="media">
+                                    <img src="{{i.product.image.url}}" class="mr-3 p-2 border rounded" width="60">
+                                    <div class="media-body">
+                                        <p class="my-0 f-16">{{i.product.title}}</p>
+
+                                        <div class="d-flex justify-content-between">
+                                            <h4 class="mt-1 font-weight-semi-bold mb-0 f-18">{{i.price}} Birr</h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <span class="text-inherit py-2">{{i.status}}</span>
+                                
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% include 'pagination.html' %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="return_model" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h3 class="modal-title">Request for product return</h3>
+                <button type="button" class="close pt-2" data-dismiss="modal">
+                    <span class="font-size-lg">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('.return_order').click(function () {
+            var _this = $(this);
+            var id = _this.attr("data-id");
+            $.ajax({
+                url: "{% url 'return_order' %}",
+                type: "get",
+                data: {
+                    'id': id
+                },
+                success: function (data) {
+                    $('#return_model').modal('show');
+                    $('#return_model').find('.modal-body').html(data);
+                },
+                error: function (err) {
+                    console.log('error', err);
+                }
+            })
+        })
+    });
+</script>
+
+
+
+{% endblock content %}

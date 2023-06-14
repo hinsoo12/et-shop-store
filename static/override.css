@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap");
+
+
+:root {
+    --primary: #161E54;
+    --secondary: #417690;
+    --accent: #18113c;;
+    --primary-fg: #fff;;
+    --body-fg: #333;
+    --body-bg: #fff;
+    --body-quiet-color: #666;
+    --body-loud-color: #000;
+    --header-color: #fff;
+    --header-branding-color: var(--accent);
+    --header-bg: var(--secondary);
+    --header-link-color: var(--primary-fg);
+    --breadcrumbs-fg: #c4dce8;
+    --breadcrumbs-link-fg: var(--body-bg);
+    --breadcrumbs-bg: var(--primary);
+    --link-fg: var(--primary);
+    --link-hover-color: #036;
+    --link-selected-fg: #5b80b2;
+    --hairline-color: #e8e8e8;
+    --border-color: #ccc;
+    --error-fg: #ba2121;
+    --message-success-bg: #dfd;
+    --message-warning-bg: #ffc;
+    --message-error-bg: #ffefef;
+    --darkened-bg: #f8f8f8;
+    --selected-bg: #e4e4e4;
+    --selected-row: #D3E0EA;
+    --button-fg: #fff;
+    --button-bg: var(--primary);
+    --button-hover-bg: #609ab6;
+    --default-button-bg: #17D7A0;
+    --default-button-hover-bg: #205067;
+    --close-button-bg: #d9534f;
+    --close-button-hover-bg: #747474;
+    --delete-button-bg: #ba2121;
+    --delete-button-hover-bg: #a41515;
+    --object-tools-fg: var(--button-fg);
+    --object-tools-bg: var(--close-button-bg);
+    --object-tools-hover-bg: var(--close-button-hover-bg);
+}
+
+body {
+    font-family: Inter, "sans-serif";
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #5c5776;
+    text-align: left;
+}
+
+input, textarea, select, .form-row p, form .button{
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit
+}
+
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: .5rem;
+    font-family: Inter, "sans-serif";
+    font-weight: 500;
+    line-height: 1.4;
+    color: #18113c
+}
+
+
+.font-weight-semi-bold {
+    font-weight: 600 !important
+}
+
+.font-weight-bold {
+    font-weight: 700 !important
+}
+
+
+#header {
+    background: #fff;;
+    color: #18113c;
+}
+
+
+#header a:link, #header a:visited {
+    color: #18113c;
+    font-weight: 600;
+}

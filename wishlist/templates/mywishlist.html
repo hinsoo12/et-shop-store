@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="pt-2 pb-5">
+    <div class="container">
+
+        <div class="row mt-0 mt-md-4 f-16">
+
+            <div class="col-lg-3 col-md-4 col-12">
+                {% include 'customer_sidebar.html' %}
+            </div>
+
+            <div class="col-lg-9 col-md-8 col-12">
+                <h1 class="mb-1 h2 font-weight-bold">Saved Products</h1>
+                <hr>
+
+                <div class="row">
+                    {% for i in saved %}
+                    <div class="col-md-4 col-6 mt-3">
+                        <div class="card mb-4 card-hover">
+                            <div class="card-img-top text-center">
+                                <img src="{{i.product.image.url}}" height="200">
+                            </div>
+                            <div class="border-top p-3 bg-light">
+                                <a href="{{i.product.get_absolute_url}}"
+                                    class="text-dark stretched-link">{{i.product.title|truncatechars:90}}</a>
+
+                                <ul class="mt-1 mb-0 list-inline">
+                                    <li class="list-inline-item">
+                                        <h3 class="font-weight-semi-bold">{{i.product.selling_price}} Birr</h3>
+                                    </li>
+
+                                    <li class="list-inline-item">
+                                        <del class="font-size-sm text-muted">{{i.product.offering_price}} Birr</del>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% include 'pagination.html' %}
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

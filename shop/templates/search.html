@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load mptt_tags %}
+{% load review_extras %}
+
+{% block content %}
+
+{% include 'message.html' %}
+
+  <div class="container mt-5">
+    {% if products %}
+    <h2 class="font-weight-bold">Search result for<span> "  {{ query }} "</span>  </h2>
+    <div class="row">
+      {% for product in products %}
+      <div class="col-md-3 col-6 mt-3">
+        <img class="w-100 rounded-lg" style="height: 220px;object-fit:cover;" src="{{product.image.url}}">
+        <div class="py-3">
+          <a href="{{ product.get_absolute_url }}"
+            class="text-dark stretched-link f-17">{{product.title|truncatechars:80}}</a>
+            <ul class="mt-1 mb-0 list-inline">
+              <li class="list-inline-item">
+                <h3 class="font-weight-semi-bold">{{product.selling_price}} Birr</h3>
+              </li>
+    
+              <li class="list-inline-item">
+                <del class="font-size-sm text-muted">{{product.offering_price}} Birr</del>
+              </li>
+            </ul>
+    
+            <div>
+              {% for i in product.average_review|times %}
+              <span class="fa fa-star text-warning font-size-xs mr-n1"></span>
+              {% endfor %}
+              <span class="font-weight-semi-bold text-warning pl-1 align-middle">{{product.average_review}}</span>
+    
+              <span class="font-size-xs text-muted align-middle">({{product.total_review}})</span>
+            </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <h3>Oops there is no products for your search << {{ query }} >> at our store</h3>
+    {% endif %}
+  </div>
+ <br>
+{% endblock content %}

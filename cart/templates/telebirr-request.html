@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="bg-light">
+
+    <div class="container d-flex flex-column min-vh-100">
+        <div class="row align-items-center justify-content-center no-gutters pt-15">
+            <div class="col-lg-5 col-md-8">
+                <div class="card shadow card-body p-6 text-center">
+                    <div class=" text-dark-primary rounded mb-3 mx-auto">
+                        <!-- <i class="fe fe-check"></i> -->
+                        <img class="img-4by3-xxl" src="{% static 'images/telebirr.jpg' %}" alt="">
+                    </div>
+                    <h2 class="mb-1 font-weight-semi-bold">Hey {{user.first_name}},</h2>
+                    <h2 class="mb-1 font-weight-semi-bold">Your total order amount is {{order.total}} Birr.</h2>
+                    <hr>
+                    <h5 class="mb-1 font-weight-semi-bold" style="color: red;" >We apologize for the inconvenience, but we are unable to process your request order via TeleBirr at this time.</h5> 
+                    <hr>
+                    <div class="mt-3">
+                        <a href="{% url 'order_success' %}"><button id="payment-button" class="btn btn-light-primary text-dark-primary f-16 py-2 px-5">Pay with TeleBirr</button></a>
+                    </div>
+                    <br>
+                    <h5 class="mb-1 font-weight-semi-bold">Your payment will be recorded as Cash On Delivery payment.</h5>       
+                    <hr>
+                    <a href="{% url 'cart' %}" class="text-dark font-weight-semi-bold f-13 py-2 px-5"> <i class="fe fe-arrow-left"></i> Go back to cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}{% endblock footer %}

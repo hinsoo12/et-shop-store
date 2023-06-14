@@ -1,0 +1,19 @@
+ <ul class="list-group f-17">
+     <a href="{% url 'customer_orders' %}" class="list-group-item border-0 text-dark {% if '/customer/orders/' in request.path %}bg-light-warning {% endif %}"> <i class="fe fe-shopping-bag mr-2"></i> My Orders</a>
+
+     <a href="{% url 'review' %}" class="list-group-item border-0 text-dark {% if 'review' in request.path %}bg-light-warning {% endif %}"> <i class="fe fe-star mr-2"></i> Review My Order</a>
+
+     <a href="{% url 'saved_products' %}" class="list-group-item border-0 text-dark {% if 'saved_products' in request.path %}bg-light-warning {% endif %}"><i class="fe fe-heart mr-2 "></i> My Wishlist [Saved Products]</a>
+
+ </ul>
+
+ <hr class="mx-3">
+
+
+ <ul class="list-group f-17 mb-3">
+     <a href="{% url 'customerinfo' %}" class="list-group-item border-0 text-dark {% if '/customer/profile/' == request.path %} bg-light-warning {% endif %}"><i class="fe fe-settings mr-2"></i> My Account</a>
+
+     <a href="{% url 'address' %}" class="list-group-item border-0 text-dark {% if 'address' in request.path %} bg-light-warning {% endif %}"><i class="fe fe-map-pin mr-2"></i> My Addresses</a>
+
+     <a href="{% url 'user_logout' %}" class="list-group-item border-0 text-danger font-weight-medium"><i class="fe fe-power mr-2"></i> Log out</a>
+ </ul>

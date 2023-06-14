@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<title> {% block title %} | Update address {% endblock %} </title>
+
+
+{% block content %}
+
+
+<div class="pt-2 pb-5">
+    <div class="container">
+
+        <div class="row mt-0 mt-md-4 f-16">
+
+            <div class="col-lg-3 col-md-4 col-12">
+                {% include 'customer_sidebar.html' %}
+            </div>
+
+            <div class="col-lg-9 col-md-8 col-12">
+
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <h3 class="mb-0">Update Addresses</h3>
+                    </div>
+
+                    <div class="card-body bg-light" >
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="card-body mx-auto" style="max-width: 600px;">
+
+                            {{form.as_p}}
+    
+                            <div class="row">
+                                <div class="col-lg-6 col-12">
+                                    <button type="submit" class="btn btn-primary">Update address</button>
+                                </div>
+                            </div>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

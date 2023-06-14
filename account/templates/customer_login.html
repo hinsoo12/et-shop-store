@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+ 
+<title> {% block title %} | Login {% endblock %} </title>
+
+
+{% block content %}
+
+<style>
+ul {
+    list-style: none;
+    padding-left: 0px;
+}
+</style>
+
+<div style="
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%),
+      rgba(221, 218, 255, 0.3);
+    background-size: cover;
+    background-position: top center;
+  ">
+
+    <div class="container pt-4">
+        <div class="row justify-content-center">
+
+            <div class="col-md-5 d-md-block d-none">
+                <div class="card card-body rounded-lg bg-primary bg-light-gradient-bottom">
+                    
+
+                    <h1 class="text-white font-weight-semi-bold">Log in and <br> start shopping!
+                    </h1>
+                    <img src="{% static 'illustrations/login.svg' %}" height="400">
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="d-md-none">
+                    <nav class="border-bottom pb-3 d-flex justify-content-center">
+                        <a href="{% url 'home' %}">
+                            <img src="{% static 'images/brand/logo/logo.png' %}" class="img-4by3-lg" loading="lazy">
+                        </a>
+                    </nav>
+                </div>
+                <div class="px-md-20 pt-md-12 p-5">
+                
+                    <div class="mb-3">
+                        <h1 class="mb-1 font-weight-bold">Log in</h1>
+                    </div>
+
+                    <form action="{% url 'user_login' %}" method="POST">
+                            {% csrf_token %}
+
+                        {{ form|crispy }}
+
+                        {% if request.GET.next %}
+                        <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+                        {% endif %}
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="rememberme">
+                                <label class="custom-control-label " for="rememberme">Remember me</label>
+                            </div>
+                            <div>
+                                <a href="{% url "password_reset" %}">Forgot your password?</a>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Log in
+                        </button>
+                    </form>
+
+                    <div class="text-center my-3 font-weight-medium">Don't have an account? <a href="{% url 'signup' %}" class="ml-1">Sign up</a></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block footer %}{% endblock footer %}

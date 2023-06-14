@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="container">
+    <h2 class="font-weight-semi-bold my-3">{{pages.name}}</h2>
+
+    {{pages.content|safe}}
+</div>
+
+
+{% endblock content %}

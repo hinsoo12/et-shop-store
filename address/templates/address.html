@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+<title> {% block title %} | Your Address {% endblock %} </title>
+
+{% block content %}
+
+
+<div class="pt-2 pb-5">
+    <div class="container">
+
+        <div class="row mt-0 mt-md-4 f-16">
+ 
+            <div class="col-lg-3 col-md-4 col-12">
+                {% include 'customer_sidebar.html' %}
+            </div>
+
+            <div class="col-lg-9 col-md-8 col-12">
+                
+                {% include 'message.html' %}
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <h3 class="mb-0">Addresses</h3>
+                    </div>
+
+                    <div class="card-body bg-light pt-0" id="address_list">
+                        <ul class="list-group list-group-flush mb-4 ">
+                            {% for address in address_list %}
+                            <li class="list-group-item py-4 border-bottom bg-light">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h4">{{address.address}}</span>
+                                        <span class="d-block">{{address.area}}, {{address.city}}, {{address.district}}</span> 
+                                    </div>
+
+                                    {% if address.default %}
+                                    <div class="col-auto">
+                                        <span class="badge badge-success mr-4">Default Address</span>
+                                    </div>
+                                    {% endif %}
+
+                                    <span class="dropdown">
+                                        <a class="text-muted text-decoration-none" href="#!" role="button" id="paymentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fe fe-more-vertical"></i>
+                                        </a>
+                                        <span class="dropdown-menu dropdown-menu-right" aria-labelledby="paymentDropdown" style="">
+                                            <span class="dropdown-header">Setting </span>
+                                            <a class="dropdown-item" href="{% url 'update_c_address' pk=address.id %}"><i class="fe fe-edit dropdown-item-icon"></i>Edit</a>
+                                            <a class="dropdown-item" href="{% url 'remove_address' id=address.id %}"><i class="fe fe-trash dropdown-item-icon"></i>Remove</a>
+                                            <a class="dropdown-item" href="{% url 'change_address' id=address.id %}"><i class="fe fe-credit-card dropdown-item-icon"></i>Make it
+                                                default</a>
+                                        </span>
+                                    </span>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <a id="show_address_input" class="btn btn-primary"> Add New Address </a>
+
+                    </div>
+
+                    <div id="add_address" class="card-body bg-light" style="visibility:hidden;">
+
+                        <form action="{% url 'add_address' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="card-body mx-auto" style="max-width: 600px;">
+
+                                {{address_form.as_p}}
+
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <button type="submit" class="btn btn-primary">Save address</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#show_address_input").click(function () {
+            $("#address_list").hide();
+            // $("#add_address").show();
+            $('#add_address').css('visibility','visible');
+
+        });
+    });
+</script>
+
+
+{% endblock content %}
