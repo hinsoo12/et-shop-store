@@ -16,7 +16,7 @@ from django.forms import ModelForm
 @admin.register(User)
 class AccountAdmin(UserAdmin):
     date_hierarchy = 'date_joined'
-    list_display = ('full_name','email','phone','is_staff', 'is_active',)
+    list_display = ('full_name','email','is_staff', 'is_active',)
     ordering = ('-date_joined',)
         
     search_fields = ('email',)
